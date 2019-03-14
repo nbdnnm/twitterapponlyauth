@@ -1,11 +1,16 @@
 package io.fake.twitterapponlyauth
 
+import io.qameta.allure.restassured.AllureRestAssured
+import io.restassured.RestAssured
 import io.restassured.RestAssured.given
+import io.restassured.builder.RequestSpecBuilder
 import io.restassured.path.json.JsonPath.from
 import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import java.lang.System.getProperty
 
 val correctAuthorization = mapOf(
@@ -23,7 +28,16 @@ var token = given()
     .response()
     .path<String>("access_token")
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TwitterTest {
+
+    @BeforeAll
+    fun setUp(){
+        val reqSpec = RequestSpecBuilder()
+            .addFilter(AllureRestAssured())
+            .build()
+        RestAssured.requestSpecification = reqSpec
+    }
 
     @Test
     fun `Positive authentication`() {

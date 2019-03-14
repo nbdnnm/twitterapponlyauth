@@ -1,6 +1,27 @@
+buildscript {
+    ext.kotlin_version = '1.3.21'
+    ext.allure_version = '2.10.0'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.qameta.allure:allure-gradle:2.4"
+    }
+}
+
 plugins {
     id "java"
     id "org.jetbrains.kotlin.jvm" version "1.3.21"
+    id "io.qameta.allure" version '2.5'
+}
+
+allure {
+    autoconfigure = true
+    version = '2.3.5'
 }
 
 group "io.fake"
@@ -22,9 +43,14 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"
     testCompile "io.rest-assured:rest-assured:3.3.0"
     testCompile "org.assertj:assertj-core:3.11.1"
+    compile "io.qameta.allure:allure-rest-assured:$allure_version"
+    compile "io.qameta.allure:allure-junit5:$allure_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'io.qameta.allure'
 
 compileKotlin {
     kotlinOptions {
