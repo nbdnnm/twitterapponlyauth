@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                bat 'gradlew.bat -DauthHeader=${params.authheader} clean test'
+                bat 'gradlew.bat -DauthHeader=${parameters.authheader} clean test'
             }
         }
     }
