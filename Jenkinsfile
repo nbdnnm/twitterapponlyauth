@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'openjdk:8-jdk' } }
+    agent { any }
     parameters {
             string(name: 'authheader', defaultValue: '', description: 'Authentication header')
         }
