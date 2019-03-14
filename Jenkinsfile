@@ -7,7 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 echo "${params.authheader}"
-                bat "gradlew.bat -DauthHeader=${params.authheader} clean test"
+                bat "gradlew.bat -DauthHeader=${params.authheader} clean test allureReport"
             }
         }
     }
