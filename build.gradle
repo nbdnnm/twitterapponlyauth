@@ -21,7 +21,11 @@ plugins {
 
 allure {
     autoconfigure = true
-    version = '2.3.5'
+    version = '2.7.0'
+    
+    useJUnit5 {
+        version = '2.7.0' // Latest Allure Version
+    }
 }
 
 group "io.fake"
